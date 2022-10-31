@@ -318,6 +318,7 @@ for(let h=0; h<=76;h++){
   Pbp.push(latln);
 }
 console.log( Pbp);
+Pbp.push(Pbp[0]);
 
 var line = {
   "type": "Feature",
@@ -380,7 +381,7 @@ var poly2=L.geoJSON(polygon, {
 //.addTo(map)
 
 //////turf difference///////////////////////////////////////////////////
-Pbp.push(Pbp[0]);
+
 var polygon1 = turf.polygon([Pbp], {
   "fill": "#F00",
   "fill-opacity": 0.1
@@ -411,6 +412,31 @@ var diff=L.geoJSON(difference, {
 //difference.addTo(map);
 
 ////ile//////////////////////////////////////////////////////////
+
+var overlaysTree =[ {
+            label: 'Couche vecteur et raster',
+            selectAllCheckbox: 'Un/select all',
+            children: [
+                {label: '<div id="onlysel">-Choisir affiché ou pas-</div>'},
+        
+                {label: 'Ligne de Base', layer:poly1},
+                {label: 'Insertitude (15 metres)', layer:poly2 }, 
+                
+            ]
+        },
+      
+      ];
+
+/*
+{label: 'ZEE', layer:shapfile_ze },
+                {label: 'Iles autours', layer:shapfile_iles},
+                {label: 'Point de Base', layer:shapfile_pb},*/
+         // var objchild={label: 'Iles autours', layer:shapfile_iles};
+          //overlaysTree[1].children.push(objchild);
+
+
+
+///
 
 var il="./geoid/Iles.zip";
 var readeril  = new XMLHttpRequest();
@@ -481,6 +507,12 @@ style: {
   
 });
 shapfile_iles.addTo(map);
+var objchild={label: 'Iles autours', layer:shapfile_iles};
+overlaysTree[0].children.push(objchild);
+
+
+////
+loadfunctionZE();
     }
     }
 
@@ -491,15 +523,14 @@ shapfile_iles.addTo(map);
 
 
 
-
-/////Actuelle ZE///////////////////////
+function loadfunctionZE(){
 var ZE='./geoid/eez.zip'
 var readerze  = new XMLHttpRequest();
 var shapfile_ze;
 
 
 
-
+/////Actuelle ZE///////////////////////
 function loadze(){
      
     readerze.open("get", ZE, true);
@@ -560,18 +591,26 @@ style: {
 });
 
 shapfile_ze.addTo(map);
+var objchild1={label: 'ZEE', layer:shapfile_ze};
+overlaysTree[0].children.push(objchild1);
+
+loadfunctionPb();
     }
   }
 
   loadze();
+}
 
 
 
 
 
 
-///////////PB/////////////////////////////
-var Pb_final='./geoid/pb_final.zip';
+function loadfunctionPb(){
+  console.log("thisssssss:"+ overlaysTree[0].children);
+
+
+  var Pb_final='./geoid/pb_final.zip';
 var readerpb  = new XMLHttpRequest();
 var shapfile_pb;
 
@@ -609,12 +648,19 @@ style: {
 });
 
 shapfile_pb.addTo(map);
+var objchild2={label: 'Points de Base', layer:shapfile_pb};
+overlaysTree[0].children.push(objchild2);²  
 
+Allfollowing();
 
     }
   }
 
   loadpb();
+
+}
+///////////PB/////////////////////////////
+
 
 
 
@@ -622,11 +668,9 @@ shapfile_pb.addTo(map);
   
     
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-     
+     function Allfollowing(){
 
-             ///show value
-
-    var command3 = L.control({position: 'topleft'});
+      var command3 = L.control({position: 'topleft'});
 
     command3.onAdd = function (map) {
     var div = L.DomUtil.create('div');
@@ -755,22 +799,6 @@ console.log(display_val);
 
   /////Data overlay
 
-  var overlaysTree =[ {
-            label: 'Couche vecteur et raster',
-            selectAllCheckbox: 'Un/select all',
-            children: [
-                {label: '<div id="onlysel">-Choisir affiché ou pas-</div>'},
-                {label: 'ZEE', layer:shapfile_ze },
-                {label: 'Iles autours', layer:shapfile_iles},
-                {label: 'Point de Base', layer:shapfile_pb},
-                {label: 'Ligne de Base', layer:poly1},
-                {label: 'Insertitude (15 metres)', layer:poly2 }, 
-                
-            ]
-        },
-
-      
-      ];
 
         var lay = L.control.layers.tree(baseTree, overlaysTree,
             {
@@ -1131,6 +1159,12 @@ var userPolygon;
   });
 
 
+
+     }
+
+             ///show value
+
+    
       
  
 
@@ -1138,9 +1172,6 @@ var userPolygon;
 }
 
 loadcor();
-
-
-
 
 
     </script>
