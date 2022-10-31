@@ -318,6 +318,7 @@ for(let h=0; h<=76;h++){
   Pbp.push(latln);
 }
 console.log( Pbp);
+ Pbp.push(Pbp[0]);
 
 var line = {
   "type": "Feature",
@@ -380,7 +381,7 @@ var poly2=L.geoJSON(polygon, {
 //.addTo(map)
 
 //////turf difference///////////////////////////////////////////////////
-Pbp.push(Pbp[0]);
+
 var polygon1 = turf.polygon([Pbp], {
   "fill": "#F00",
   "fill-opacity": 0.1
