@@ -492,9 +492,27 @@ shapfile_iles.addTo(map);
 
 
 
-/////Actuelle ZE
+/////Actuelle ZE///////////////////////
 var ZE='./geoid/eez.zip'
-var shapfile_ze = new L.Shapefile(ZE, {         
+var readerze  = new XMLHttpRequest();
+var shapfile_ze;
+
+
+
+
+function loadze(){
+     
+    readerze.open("get", ZE, true);
+    readerze.onreadystatechange=  storedata_ze;
+    readerze.send(null);
+   
+   }
+
+function storedata_ze (){
+
+    if(readerze.readyState==4) {
+      var cnt=readerze.responseURL;
+      shapfile_ze = new L.Shapefile(cnt, {         
 style: {
     "color": "#000000",
     "fill": "none",
@@ -542,13 +560,37 @@ style: {
 });
 
 shapfile_ze.addTo(map);
+    }
+  }
+
+  loadze();
+
+
+
+
+
 
 ///////////PB/////////////////////////////
+var Pb_final='./geoid/pb_final.zip';
+var readerpb  = new XMLHttpRequest();
+var shapfile_pb;
 
 
 
-var Pb_final='./geoid/pb_final.zip'
-var shapfile_pb = new L.Shapefile(Pb_final, {         
+
+function loadpb(){
+     
+    readerpb.open("get", Pb_final, true);
+    readerpb.onreadystatechange=  storedata_pb;
+    readerpb.send(null);
+   
+   }
+
+function storedata_pb (){
+
+    if(readerpb.readyState==4) {
+      var cnt=readerpb.responseURL;
+      shapfile_pb = new L.Shapefile(Pb_final, {         
 style: {
     "color": "#000000",
     "fill": "none",
@@ -568,7 +610,17 @@ style: {
 
 shapfile_pb.addTo(map);
 
-    
+  
+
+shapfile_ze.addTo(map);
+    }
+  }
+
+  loadpb();
+
+
+
+  
   
     
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
