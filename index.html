@@ -45,6 +45,7 @@
        
        <link rel="stylesheet" href="css/leaflet.css"  />
        <link rel="stylesheet" href="css/L.Control.Layers.Tree.css"  />
+       <link rel="stylesheet" href="css/loader.css">
       
  
    <script src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js" integrity="sha256-NDI0K41gVbWqfkkaHj15IzU7PtMoelkzyKp8TOaFQ3s=" crossorigin=""></script>
@@ -112,8 +113,12 @@
 
    </h1>
    
-   <div  id="map"></div>
-   By Safidy.Rat
+
+   <div  id="map">
+    <div class="loader" id="load">Loading...</div>
+    By Safidy.Rat
+   </div>
+
 
  
 
@@ -318,11 +323,7 @@ for(let h=0; h<=76;h++){
   Pbp.push(latln);
 }
 console.log( Pbp);
-<<<<<<< HEAD
 Pbp.push(Pbp[0]);
-=======
- Pbp.push(Pbp[0]);
->>>>>>> 2e3719b7fef5b711e986ebae63705f37c430ebb4
 
 var line = {
   "type": "Feature",
@@ -421,10 +422,10 @@ var overlaysTree =[ {
             label: 'Couche vecteur et raster',
             selectAllCheckbox: 'Un/select all',
             children: [
-                {label: '<div id="onlysel">-Choisir affiché ou pas-</div>'},
+                {label: '<div id="onlysel"></div>'},
         
                 {label: 'Ligne de Base', layer:poly1},
-                {label: 'Insertitude (15 metres)', layer:poly2 }, 
+                {label: 'Incertitude (15 metres)', layer:poly2 }, 
                 
             ]
         },
@@ -653,7 +654,7 @@ style: {
 
 shapfile_pb.addTo(map);
 var objchild2={label: 'Points de Base', layer:shapfile_pb};
-overlaysTree[0].children.push(objchild2);²  
+overlaysTree[0].children.push(objchild2);
 
 Allfollowing();
 
