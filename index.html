@@ -1,138 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
- 
+<html>
 <head>
+  <style>
 
-<title>MAP</title>
+
+.button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button2 {background-color: #008CBA;} /* Blue */
+
+.menu{
+  margin-right: 10 px;
+}
+
+
+
+  </style>
 <meta charset="utf-8">
-<link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
-<link rel="stylesheet" href="css/dropdown.css" type="text/css" media="all">
+<title>Pre-process IMAGE</title>
+<script src="js/Vert_Hort_line_clean.js"></script>
+<script src="js/roundslider.js"></script>
 
-  <div class="body2">  
-   <div class="main">
-     <header>
-      
-        <h1><a href="#" id="logo">science</a></h1>
-        
-
-      </div>-->
-      <div class="wrapper">
-        
-      </div>
-    </header>
-  </div>
-</div>
-    <meta charset="utf-8">
-  
-    <style>
-
-
-
-      body, html { margin:0; padding:0; height:100%;}
-      body { font-family:sans-serif; }
-      body * { font-weight:200;}
-      h1 { position:absolute; background:white; padding:10px;}
-      #map { height:100%; }
-      .leaflet-container {
-        background: rgba(0,0,0,.8) !important;
-      }
-      h1 { position:absolute; background:black; color:white; padding:10px; font-weight:200; z-index:10000;}
-      #all-examples-info { position:absolute; background:white; font-size:16px; padding:20px; top:100px; width:350px; line-height:150%; border:1px solid rgba(0,0,0,.2);}
-    </style>
-    
-       <!--<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css"  />-->
-
-       
-       <link rel="stylesheet" href="css/leaflet.css"  />
-       <link rel="stylesheet" href="css/L.Control.Layers.Tree.css"  />
-      
- 
-   <script src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js" integrity="sha256-NDI0K41gVbWqfkkaHj15IzU7PtMoelkzyKp8TOaFQ3s=" crossorigin=""></script>
-   <script src="js/ActiveLayers.js"></script>
-
-   <script
-   type="text/javascript"
-    src="https://unpkg.com/leaflet-contour@1.0.0/dist/leaflet-contour.min.js"
-  ></script>
-
-   <script src="js/SelectLayers.js"></script>
-   <script src="js/L.Control.Layers.Tree.js"></script>
-
-
-
-   <script src="js/heatmap.js"></script>
-   <script src="js/leaflet-heatmap.js"></script>
-
-   <!--<script src="https://leaflet.calvinmetcalf.com/jam/shp/dist/shp.js"></script>-->
-
-   <script src="js/shp.js"></script>
-   <script src="js/proj4.js"></script>
-   <script src="js/leaflet.shpfile.js"></script>
-
-  
-
-   <script src="js/heatmapscript/leaflet-heat.js"></script>
-
-   <script src="https://unpkg.com/georaster-layer-for-leaflet@0.4.1/georaster-layer-for-leaflet.browserify.min.js"></script>
-   <script src="https://unpkg.com/georaster-layer-for-leaflet@0.4.1/georaster-layer-for-leaflet.bundle.js"></script>
-   <script src="https://unpkg.com/georaster-layer-for-leaflet@0.4.1/georaster-layer-for-leaflet.js"></script>
-   <script src="https://unpkg.com/georaster-layer-for-leaflet@0.4.1/georaster.browser.bundle.js"></script>
-
-   <script src="https://npmcdn.com/@turf/turf/turf.min.js"></script>
-
-  <link rel="stylesheet" href="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.css" />
-<script src="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.js"></script>
-
-  
-
-  
-   
-
- 
-
-
-  
-
-
-
-
- 
-  
-
- 
-
+<link rel="stylesheet" href="css/slider.css">
+<link rel="stylesheet" href="css/loader.css">
+<link rel="stylesheet" href="css/roundlider.css">
 
 </head>
+<body>
 
-  <body>
-   <h1 class="trans"  ><br><br><br><br><br>
+<h2>Pre-process IMAGE</h2>
+<p id="status"> loading...</p>
+<div>
+  <div>
+    <input type="checkbox" id="chKh" name="Kh_active" > Detecte Horizontal Line
+  </div>
+  <div>
+    <input type="checkbox" id="chKv" name="Kv_active" >Detecte Verticale Line
+  </div>
+
+  <div class="row">
+
+  <div class="round-slider each">
+    <div class="selection" name="00Kh00" style=""></div>
+    <div class="holder" style="color: hsl(120, 100%, 50%);">19%</div><br>
+      Horizontal line detection parametre
+  </div>
+
+
+  
+  <div class="round-slider each">
+    <div class="selection" name="00Khrepaire00"style=""></div>
+    <div class="holder" style="color: hsl(120, 100%, 50%);">50%</div><br>
+    Repaire broken Horizontal line
+  </div>
+
+  <div class="round-slider each">
+    <div class="selection"name="00Kv00" style=""></div>
+    <div class="holder" style="color: hsl(120, 100%, 50%);">5%</div><br>
+    Vertical line detection parametre
+  </div>
+
+  <div class="round-slider each">
+    <div class="selection" name="00Kvrepaire00"style=""></div>
+    <div class="holder" style="color: hsl(120, 100%, 50%);">50%</div><br>
+    Repaire broken Vertical line
+  </div>
+
+
+  <div class="round-slider each">
+    <div class="selection" name="00line_withd00"style=""></div>
+    <div class="holder" style="color: hsl(120, 100%, 50%);">50%</div><br>
+    Contour line width
+  </div>
+
+  <div class="round-slider each">
+    <div class="selection" name="00perimetre00"style=""></div>
+    <div class="holder" style="color: hsl(120, 100%, 50%);">1%</div><br>
+    Filter detected line by  perimetre
+    
+  </div>
+
+  <div class="loader" id="load">Loading...</div>
+
+</div>
+
+  <div class="inputoutput">
+    <img id="imageSrc" alt="No Image" />
+    <div class="caption">Load file to digitize <input type="file" id="fileInput" name="file" /></div>
+
+  
 
     
+  </div><br><br><br>
+
+
+
  
 
-   </h1>
-   
-   <div  id="map"></div>
-   By Safidy.Rat
-
- 
 
 
-   <script type="text/javascript" src="./js/datareader.js"></script>
-
-    <script>
-    
-///LOAD DATA
-
-
-
-
-
-
-/*datacor= async () => {
-  await loadcor(files[0]); 
-  console.log(datacor);
-};*/
+  
+   <!-- 
+  <div class="range-slider">
+    <input class="range-slider__range" id ="Kh"type="range" value="25" min="5" max="500">
+    <span class="range-slider__value">25</span>Kernel Window for Horitontal line detection
+  </div>
+  -->
+  
+  
 
 
 
@@ -141,1043 +125,176 @@
 
 
 
-/// spliting correction data
-function display(){
+  
+
+
 
 
  
+  <div>
+    <button onclick="download()" class="button button2">DIGITIZE</button>
+  </div>
 
- 
+  <div class="inputoutput">
+    <canvas id="originale_image" ></canvas>
+    <canvas id="Horizontale_line" ></canvas>
+    <canvas id="verticale_line" ></canvas>
+    <canvas id="Extracted_curve" ></canvas><br><br>
+    <div class="me"> By Safidy Ratolonandrasana</div>
+  </div>
+</div>
+<script type="text/javascript" >
 
+document.getElementById("load").style.display = "block";
 
+  document.getElementById("chKh").click();
+  document.getElementById("chKv").click();
 
+  //clear
 
-      
-
-
-var mbAttr = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
-
-var mbUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
-
-var baseLayer = L.tileLayer(mbUrl, {
-id: 'mapbox.streets',
-attribution: mbAttr
-});
-
-
-
-
-
-      var cfg = {
-        // radius should be small ONLY if scaleRadius is true (or small radius is intended)
-    
-        "radius":  1,
-        "maxOpacity": .3,
-    
-        // scales the radius based on map zoom
-        "scaleRadius": true, 
-        // if set to false the heatmap uses the global maximum for colorization
-        // if activated: uses the data maximum within the current map boundaries 
-        //   (there will always be a red spot with useLocalExtremas true)
-        "useLocalExtrema": false,
-        // which field name in your data represents the latitude - default "lat"
-        latField: 'lat',
-        // which field name in your data represents the longitude - default "lng"
-        lngField: 'lng',
-        // which field name in your data represents the data value - default "value"
-        valueField: 'count'
-      };
-
-      console.log(cfg);
+  var allcanvas=[];
+  allcanvas=[document.getElementById("riginale_image"), 
+  document.getElementById("Horizontale_line"),
+  document.getElementById("verticale_line"),
+  document.getElementById("Extracted_curve")];
 
 
-      var cfg2 = {
-       
+for(let i=0; i<=allcanvas.length; i++){
 
-        "gradient": {
-            0.85: 'blue',
-            0.92:"green",
-            0.98: 'yellow',
-            1: 'red'
-        },
-
-        
-        // radius should be small ONLY if scaleRadius is true (or small radius is intended)
-        "radius":0.5,
-        "maxOpacity": .3, 
-
-
-
-
-
-
-
-
-        
-    
-        // scales the radius based on map zoom
-        "scaleRadius":true, 
-        // if set to false the heatmap uses the global maximum for colorization
-        // if activated: uses the data maximum within the current map boundaries 
-        //   (there will always be a red spot with useLocalExtremas true)
-        "useLocalExtrema":true,
-      
-       
-
-     
-        // which field name in your data represents the latitude - default "lat"
-        latField: 'lat',
-        // which field name in your data represents the longitude - default "lng"
-        lngField: 'lng',
-        // which field name in your data represents the data value - default "value"
-        valueField: 'count'
-      };
-
-    
-
-      var cfg3 = {
-        "gradient": {
-            0.85: 'blue',
-            0.92:"green",
-            0.98: 'yellow',
-            1: 'red'
-        },
-        // radius should be small ONLY if scaleRadius is true (or small radius is intended)
-        "radius": 0.05,
-        "maxOpacity": 0.4, 
-        // scales the radius based on map zoom
-        "scaleRadius": true, 
-        // if set to false the heatmap uses the global maximum for colorization
-        // if activated: uses the data maximum within the current map boundaries 
-        //   (there will always be a red spot with useLocalExtremas true)
-        "useLocalExtrema": true,
-        // which field name in your data represents the latitude - default "lat"
-        latField: 'lat',
-        // which field name in your data represents the longitude - default "lng"
-        lngField: 'lng',
-        // which field name in your data represents the data value - default "value"
-        valueField: 'count',
-      
-      };
-
-
-      var heatmapLayer3 = new HeatmapOverlay(cfg3);
-       heatmapLayer3.setData(testData[2]);
-
-      /*var heatmapLayer2 = new HeatmapOverlay(cfg2);
-       heatmapLayer2.setData(testData[1]);*/
-
-       console.log(heatmapLayer2);
-
-
-
-
-
-
-      var heatmapLayer = new HeatmapOverlay(cfg);
-      heatmapLayer.setData(testData[0]);
-
-
-      var center = [37.78791180770003, -122.40962505340575];
-
-/*
-      var map = new L.Map('map', {
-        center: new L.LatLng(-19.5, 44),
-        zoom: 6,
-        layers: baseLayer
-      });*/
-
-      var map = new L.Map('map', {
-        center: new L.LatLng(-19.5, 44),
-        zoom: 6,
-        layers: baseLayer
-      });
-
-
-
-   
-
-      //////////////////////////////////////////////////
-
-
-/////measur
-L.control.polylineMeasure({unit: 'miles'}).addTo(map);
-
-
-
-
-
-///////////////////////////////////////////TURF/////////////////////////////////////////////////
-
-// Creat Bufffffre////////////////////////////////////////////////////
-console.log(Longpb)
-var Pbp=[];
-for(let h=0; h<=76;h++){
- 
-  var latln=[Longpb[h],Latpb[h]];
-  Pbp.push(latln);
+  if(allcanvas[i]!=null){
+  
+  var context = allcanvas[i].getContext('2d');
+  // do some drawing
+  context.clearRect(0, 0, allcanvas[i].width, allcanvas[i].height);
+  }
 }
-console.log( Pbp);
-<<<<<<< HEAD
-Pbp.push(Pbp[0]);
-=======
- Pbp.push(Pbp[0]);
->>>>>>> 2e3719b7fef5b711e986ebae63705f37c430ebb4
-
-var line = {
-  "type": "Feature",
-  "properties": {
-    "color": "blue"
-  },
-  "geometry": {
-    "type": "LineString",
-    "coordinates": Pbp
-    /*[
-      [-122.40447521209718,
-        37.79367718768535
-      ],
-      [-122.40803718566895,
-        37.79171022624846
-      ],
-      [-122.40769386291502,
-        37.79096412372944
-      ],
-      [-122.40662097930908,
-        37.789641468930114
-      ],
-      [-122.40941047668457,
-        37.789675383451495
-      ],
-      [-122.40992546081543,
-        37.78875968591083
-      ],
-      [-122.40962505340575,
-        37.78791180770003
-      ]
-    ]*/
-  }
-};
-
-
-
-var poly1=L.geoJSON(line, {
-  style: function(feature) {
-    return {
-      color: feature.properties.color
-    };
-  }
-}).addTo(map);
-
-var polygon = turf.buffer(line, 0.015, {
-  units: 'kilometres',
-  steps: 15
-});
-
-console.log(polygon.geometry.coordinates);
-
-var poly2=L.geoJSON(polygon, {
-  style: function(feature) {
-    return {
-      color: feature.properties.color
-    };
-  }
-}).addTo(map);
-//.addTo(map)
-
-//////turf difference///////////////////////////////////////////////////
-
-var polygon1 = turf.polygon([Pbp], {
-  "fill": "#F00",
-  "fill-opacity": 0.1
-});
-var buffpoint=polygon.geometry.coordinates[0];
-buffpoint.push(buffpoint[0]);
-
-console.log(buffpoint[0]);
-
-var polygon2 = turf.polygon([buffpoint], {
-  "fill": "#00F",
-  "fill-opacity": 0.1
-});
-
-
-var difference = turf.difference(polygon2, polygon1);
-
-
-
-//var difference = turf.difference(polygon, line);
-var diff=L.geoJSON(difference, {
-  style: function(feature) {
-    return {
-      color: "#00F"
-    };
-  }
-}).addTo(map);
-//difference.addTo(map);
-
-////ile//////////////////////////////////////////////////////////
-
-var overlaysTree =[ {
-            label: 'Couche vecteur et raster',
-            selectAllCheckbox: 'Un/select all',
-            children: [
-                {label: '<div id="onlysel">-Choisir affiché ou pas-</div>'},
-        
-                {label: 'Ligne de Base', layer:poly1},
-                {label: 'Insertitude (15 metres)', layer:poly2 }, 
-                
-            ]
-        },
-      
-      ];
-
-/*
-{label: 'ZEE', layer:shapfile_ze },
-                {label: 'Iles autours', layer:shapfile_iles},
-                {label: 'Point de Base', layer:shapfile_pb},*/
-         // var objchild={label: 'Iles autours', layer:shapfile_iles};
-          //overlaysTree[1].children.push(objchild);
-
-
-
-///
-
-var il="./geoid/Iles.zip";
-var readeril  = new XMLHttpRequest();
-var shapfile_iles;
-
-
-
-
-function loadiles(){
-     
-    readeril.open("get",il, true);
-    readeril.onreadystatechange=  storedata_iles;
-    readeril.send(null);
-   
-   }
-
-function storedata_iles (){
-
-    if(readeril.readyState==4) {
-      var cnt=readeril.responseURL;
-      console.log("hhhhhhhhhhhhh:"+ il);
-  
-
-      shapfile_iles = new L.Shapefile(cnt, {         
-style: {
-    "color": "#000000",
-    "fill": "none",
-    "weight": 2
-  },
-
  
+
+  function  download (){
+
+ var canvass=document.getElementById("Extracted_curve");
+localStorage.setItem("canvasOutput", canvass.toDataURL());
+
+
+  var link = document.createElement('a');
+  link.download = 'D:\2022\chart\testdownload\filename.png';
+  link.href = document.getElementById('Extracted_curve').toDataURL();
+  //link.click();
+
+  window.location = 'dev.html';
+}
+
+let imgElement = document.getElementById('imageSrc');
+let inputElement = document.getElementById('fileInput');
+inputElement.addEventListener('change', (e) => {
+  imgElement.src = URL.createObjectURL(e.target.files[0]);
+}, false);
+imgElement.onload = function() {
+
+
+  roundslider();
+  var v1=[95,300,35,300,1,5];
+  line_cleanign(v1[0],v1[1],v1[2],v1[3],v1[4],v1[5]);
+
+
+  ///Initialisation
+
+  var sliders = document.getElementsByClassName("round-slider");
+
+  function round_slider_tune2(event) {
+
+    for(let i=0; i<=5;i++){
+
+      let eventDoc = (event.target && event.target.ownerDocument) || document,
+  doc = eventDoc.documentElement,
+  body = eventDoc.body;
+event.pageX = event.clientX +
+    (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+    (doc && doc.clientLeft || body && body.clientLeft || 0);
+event.pageY = event.clientY +
+    (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
+    (doc && doc.clientTop  || body && body.clientTop  || 0 );
+let output = event.target.getElementsByClassName("selection")[0],
+  text = event.target.getElementsByClassName("holder")[0],
+  styleafter = document.head.appendChild(document.createElement("style")),
+  elpos = event.target.getBoundingClientRect(),
+  cX = elpos.width / 2,
+  cY = elpos.height / 2,
+  eX = event.pageX - elpos.left,
+  eY = event.pageY - elpos.top,
+  dX = 0,
+  dY = 0,
+  angle = Math.atan2(cX - eX, cY - eY) * (180 / Math.PI),
+  value = 100;
+//console.log(cX, cY, eX, eY, angle);
+
+if (Math.abs(eX - cX) >= Math.abs(eY - cY)) { // 110 90
+  dX = 150 / 2 + Math.sign(eX - cX) * 150 / 2;
+  dY = 150 / 2 + (eY - cY) / Math.abs(eX - cX) * 150 / 2;
+} else {
+  dX = 150 / 2 + (eX - cX) / Math.abs(eY - cY) * 150 / 2;
+  dY = 150 / 2 + Math.sign(eY - cY) * 150 / 2;
+}
+dX = Math.round(dX / 150 * 100)
+dY = Math.round(dY / 150 * 100)
+//console.log(dX + "%", dY + "%");
+/*if (0 < angle && angle <= 45) {
+} else if (45 < angle && angle <= 120) {
+} else if ((120 < angle && angle <= 180) || (-180 < angle && angle <= -120)) {
+} else if (-120 < angle && angle <= -45) {
+} else if (-45 < angle && angle <= 0) {}*/
+if (0 <= dX && dX < 50 && dY == 0) {
+  output.style = "clip-path: polygon(" + dX + "% " + dY + "%, 50% 0%, 50% 50%);";
+  value = Math.round((50 - dX) / 50 * 12.5);
+} else if (dX == 0 && 0 <= dY && dY <= 100) {
+  output.style = "clip-path: polygon(" + dX + "% " + dY + "%, 0% 0%, 50% 0%, 50% 50%);";
+  value = Math.round(12.5 + dY / 100 * 25);
+} else if (0 <= dX && dX <= 100 && dY == 100) {
+  output.style = "clip-path: polygon(" + dX + "% " + dY + "%, 0% 100%, 0% 0%, 50% 0%, 50% 50%);";
+  value = Math.round(37.5 + dX / 100 * 25);
+} else if (dX == 100 && 0 <= dY && dY <= 100) {
+  output.style = "clip-path: polygon(" + dX + "% " + dY + "%, 100% 100%, 0% 100%, 0% 0%, 50% 0%, 50% 50%);";
+  value = Math.round(62.5 + (100 - dY) / 100 * 25);
+} else if (50 <= dX && dX <= 100 && dY == 0) {
+  output.style = "clip-path: polygon(" + dX + "% " + dY + "%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 50% 0%, 50% 50%);";
+  value = Math.round(87.5 + (100 - dX) / 50 * 12.5);
+}
+styleafter.innerHTML = ".round-slider .selection:after {transform: rotate(" + -angle + "deg);}";
+let hue = Math.floor(value / 100 * 120),
+  saturation = Math.abs(value - 50);
+
+     // console.log(value);
+     
+//text.innerHTML = value + "%";
+  text.innerHTML = value;
+text.style = "color: hsl(" + hue + ", 100%, " + saturation + "%);";
+
   
-  onEachFeature: function(feature, layer) {
-    layer.bindPopup(feature.properties.Nom, {permanent: true, opacity: 0.5}).openTooltip();
-  
+}
 
-    if (feature.properties && feature.properties.name) {
-
-           
-            label = String(feature.properties.name);
-
-        
-            //layer.bindPopup(feature.properties.name).openTooltip();
-            var element = document.getElementById(".leaflet-tooltip");
-            console.log("all"  );
-            //element.classList.remove("background-color");
-
-            layer.bindPopup("layer.feature.properties.name", {permanent: true, opacity: 5}).openTooltip();
-
-            //layer.bindPopup(layer.feature.properties.Nom).openPopup();
-            //layer.bindPopup(layer.feature.properties.Nom, {permanent: true, opacity: 5});
-           
-            //layer.bindTooltip("<h4>"+feature.properties.name+"</h4>", {permanent: true, opacity: 5});
-            //layer.bindPopup(layer.feature.properties.name);
-
-
-        }
-
-
-        ///push new tree
-
-        
-
-
-
-      }
-
-  
-});
-shapfile_iles.addTo(map);
-var objchild={label: 'Iles autours', layer:shapfile_iles};
-overlaysTree[0].children.push(objchild);
-
-
-////
-loadfunctionZE();
-    }
     }
 
 
-    loadiles();
-    
-
-
-
-
-function loadfunctionZE(){
-var ZE='./geoid/eez.zip'
-var readerze  = new XMLHttpRequest();
-var shapfile_ze;
-
-
-
-/////Actuelle ZE///////////////////////
-function loadze(){
-     
-    readerze.open("get", ZE, true);
-    readerze.onreadystatechange=  storedata_ze;
-    readerze.send(null);
-   
-   }
-
-function storedata_ze (){
-
-    if(readerze.readyState==4) {
-      var cnt=readerze.responseURL;
-      shapfile_ze = new L.Shapefile(cnt, {         
-style: {
-    "color": "#000000",
-    "fill": "none",
-    "weight": 2
-  },
-
- 
-  
-  onEachFeature: function(feature, layer) {
-    layer.bindPopup("ZEE", {permanent: true, opacity: 0.5}).openTooltip();
   
 
-    if (feature.properties && feature.properties.name) {
-
-           
-            label = String(feature.properties.name);
-
-        
-            //layer.bindPopup(feature.properties.name).openTooltip();
-            var element = document.getElementById(".leaflet-tooltip");
-            console.log("all"  );
-            //element.classList.remove("background-color");
-
-            layer.bindPopup("layer.feature.properties.name", {permanent: false, opacity: 0.5}).openTooltip();
-
-            //layer.bindPopup(layer.feature.properties.Nom).openPopup();
-            //layer.bindPopup(layer.feature.properties.Nom, {permanent: true, opacity: 5});
-           
-            //layer.bindTooltip("<h4>"+feature.properties.name+"</h4>", {permanent: true, opacity: 5});
-            //layer.bindPopup(layer.feature.properties.name);
 
 
-        }
-
-
-        ///push new tree
-
-        
-
-
-
-      }
-
-  
-});
-
-shapfile_ze.addTo(map);
-var objchild1={label: 'ZEE', layer:shapfile_ze};
-overlaysTree[0].children.push(objchild1);
-
-loadfunctionPb();
-    }
-  }
-
-  loadze();
-}
-
-
-
-
-
-
-function loadfunctionPb(){
-  console.log("thisssssss:"+ overlaysTree[0].children);
-
-
-  var Pb_final='./geoid/pb_final.zip';
-var readerpb  = new XMLHttpRequest();
-var shapfile_pb;
-
-
-
-
-function loadpb(){
-     
-    readerpb.open("get", Pb_final, true);
-    readerpb.onreadystatechange=  storedata_pb;
-    readerpb.send(null);
-   
-   }
-
-function storedata_pb (){
-
-    if(readerpb.readyState==4) {
-      var cnt=readerpb.responseURL;
-      shapfile_pb = new L.Shapefile(Pb_final, {         
-style: {
-    "color": "#000000",
-    "fill": "none",
-    "weight": 2
-  },
-
- 
-  
-  onEachFeature: function(feature, layer) {
-    layer.bindPopup(layer.feature.properties.name, {permanent: true, opacity: 0.5}).openTooltip();
-    
-
-      }
-
-  
-});
-
-shapfile_pb.addTo(map);
-var objchild2={label: 'Points de Base', layer:shapfile_pb};
-overlaysTree[0].children.push(objchild2);²  
-
-Allfollowing();
-
-    }
-  }
-
-  loadpb();
-
-}
-///////////PB/////////////////////////////
-
-
-
-
-  
-  
-    
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-     function Allfollowing(){
-
-      var command3 = L.control({position: 'topleft'});
-
-    command3.onAdd = function (map) {
-    var div = L.DomUtil.create('div');
-    div.innerHTML = `
-    <div id="tooltip" value="test overlapping"> </div>`; 
-    return div;
-        
-};
-command3.addTo(map);
-
-var tooltip = document.querySelector('#tooltip');
-
-function updateTooltip(x, y, display_val) {
-  // + 15 for distance to cursor
-  var transl = 'translate(' + (x ) + 'px, ' + (y ) + 'px)';
-  tooltip.style.webkitTransform = transl;
-  tooltip.innerHTML = display_val;
 };
 
 
 
-//map.createPane('heatPane');
-//heatmapLayer2['overlayPane'] = 'heatPane';
 
-/*
-var heatPane = map.getPanes('heatPane').overlayPane; // access the canvas
-// now, use mousemove on pane; the leaflet map.on("mousemove", function (e){}) won't help
-heatPane.onmousemove = function (e) { 
-  var x = e.layerX;
-  var y = e.layerY;
-var display_val = heatmapLayer2._heatmap.getValueAt({
-    x: x,
-    y: y
-});
 
-
-
-
-console.log(display_val);
- // display wherever you like the 'display_val' parameter, either as tooltip or in a div
- //tooltip.style.display = 'block';
-  updateTooltip(x, y, display_val);
-
-};
-*/
-
-
-     
-  
-
-      // make accessible for debugging
-      layer = heatmapLayer;
-
-
-
-
-
-      ///////LAYERS
-
-      var osmbaseLayer = L.tileLayer(
-        'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-          attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-          maxZoom: 18
-        }
-      );
-
-  
-
-      var baseTree =
-             [
-                {
-                    label: 'BASEMAP',
-                    //layer: osmbaseLayer,
-                    children: [
-                        {label: 'openStreeMap', layer: osmbaseLayer, name: 'OpenStreeMap'},
-                        {label: 'Esri satellite Map', layer: baseLayer, name: 'Esri satellite Map'},
-                    ]
-                },
-                
-            ];
-
-            var baseTree2 =
-             [
-                {
-                  layer: osmbaseLayer,
-                   
-                    children: [
-                        
-                    ]
-                },
-                
-            ];
-     
-
-
-        var ctl = L.control.layers.tree(baseTree, null,
-            {
-                namedToggle: true,
-                //collapseAll: 'Collapse all',
-                //expandAll: 'Expand all',
-                collapsed: false,
-            });
-
-  //ctl.addTo(map).collapseTree().expandSelected(); 
-  
-  var hasAllUnSelected = function() {
-            return function(ev, domNode, treeNode, map) {
-                var anySelected = false;
-                function iterate(node)
-                {
-                    if (node.layer && !node.radioGroup) {
-                        anySelected = anySelected || map.hasLayer(node.layer);
-                    }
-                    if (node.children && !anySelected) {
-                        node.children.forEach(function(element) { iterate(element); });
-                    }
-                }
-                iterate(treeNode);
-                return !anySelected;
-            };
-        };
-            
-            
-            
-            
-
-  /////Data overlay
-
-
-        var lay = L.control.layers.tree(baseTree, overlaysTree,
-            {
-                namedToggle: true,
-                selectorBack: false,
-                closedSymbol: '&#8862; &#x1f5c0;',
-                openedSymbol: '&#8863; &#x1f5c1;',
-                //collapseAll: 'Collapse all',
-                //expandAll: 'Expand all',
-                collapsed: false,
-            });
-
-            lay.addTo(map).collapseTree().expandSelected().collapseTree(true);
-        L.DomEvent.on(L.DomUtil.get('onlysel'), 'click', function() {
-            lay.collapseTree(true).expandSelected(true);
-        });
-
-
-
-  //////////////////
-
-
-
-/*if(control._activeOverlayLayers.name=='Clouds2'){
-
-
-  console.log("okookokokokok:"+ control._activeOverlayLayers.name);
-}
-*/
-
-
-
-
-
-      // Creating a marker
-      /*
-      var marker=[]
-      for(let i=0; i<=datacor.length-3;i++){
-
-        marker[i] = new L.Marker([Latcor[i], Longcor[i]]);
-         // Adding popup to the marker
-         Cor[i]=Cor[i]-2.505;
-         marker[i].bindPopup( locName[i]+": "+ Cor[i]+ " m").openPopup();
-
-        marker[i].addTo(map);
-      
-
-      }
-
-      console.log(locName);*/
-
-
-      var command = L.control({position: 'topright'});
-      var command2 = L.control({position: 'topleft'});
-
-      function load_home() {
-     document.getElementById("command2").innerHTML='<object type="text/html" data="Madamap2.html" ></object>';
-}
-
-///printer IMG
-
-
-
-///////////////
-
-
-command.onAdd = function (map) {
-    var div = L.DomUtil.create('div');
-    div.innerHTML = `
-    <div >
-      
-      <input type="file" id="file-selector" accept=".zip" style="display: none;" />
-      <input type="button" class="styled" value="Load ziped shapefile" onclick="document.getElementById('file-selector').click();" /><br><br>
-
-      <input type="file" id="file-selector2" accept=".tif" style="display: none;" />
-      <input type="button" class="styled" value="Load raster file" onclick="document.getElementById('file-selector2').click();" />
-
- 
-    </div>`; 
-    return div;
-
-    
-    document.getElementById("command1").checked = true;
-        
-};
-command.addTo(map);
-
-      
- 
-
-
-///file loader
-var contents="";
-var contents2="";
-var atribute=[];
-
-var longb=[];
-var latb=[];
-var name=[];
-var i=0;
-
-var markerArray = [];
- var markerLocation;
-
- var rasterfirstload=0;
- var vectorfirstload=0;
- var first="";
-
-///geotiff load
-
-document.getElementById("file-selector2").addEventListener("change", function(event) {
-        var file = event.target.files[0];
-        console.log("file:", file);
-
-        var reader = new FileReader();
-        reader.readAsArrayBuffer(file);
-        reader.onloadend = function() {
-          var arrayBuffer = reader.result;
-          parseGeoraster(arrayBuffer).then(georaster => {
-
-            console.log("georaster:", georaster);
-            /*
-                GeoRasterLayer is an extension of GridLayer,
-                which means can use GridLayer options like opacity.
-                Just make sure to include the georaster option!
-                http://leafletjs.com/reference-1.2.0.html#gridlayer
-            */
-            var layer = new GeoRasterLayer({
-                georaster: georaster,
-                opacity: 25,
-          
-               
-               
-                resolution: 250 // optional parameter for adjusting display resolution
-            });
-      
-            map.fitBounds(layer.getBounds());
-            layer.setZIndex(10);
-            layer.addTo(map);
-
-            ///push new tree
-
-            if (rasterfirstload==0)
-            {
-
-              var rasterTree =
-            {
-              label: 'Raster Layers',
-            selectAllCheckbox: 'Un/select all',
-            children: [
-
-            {label: file.name, layer: layer },
-    
-              ]
-        }
-
-        overlaysTree.push(rasterTree);
-        rasterfirstload=1;
-
-        if(first ==""){
-          first="raster";
-        }
-        
-
-
-            }
-
-
-            else{
-
-        if(first=="raster"){
-          var objchild={label: file.name, layer: layer };
-          overlaysTree[1].children.push(objchild);
-          console.log(overlaysTree[1].children);
-        }
-
-        if(first=="vector"){
-          var objchild={label: file.name, layer: layer };
-          overlaysTree[2].children.push(objchild);
-          console.log(overlaysTree[2].label);
-        }
-       
-
-          }
-
-
-            
-
-
-  
-
-           lay.setOverlayTree(overlaysTree);
-          
-
-
-       
-          });
-        };
-      });
-
-
-////shp load
-
-
-
-
-  const fileSelector = document.getElementById('file-selector');
-  fileSelector.addEventListener('change', (event) => {
-    const fileList = event.target.files[0];
-    var reader = new FileReader(); 
-    reader.onload = function(event) { 
-        console.log(event.target.result);
-       contents = event.target.result;
-
-
-        var shapfile = new L.Shapefile(contents, {      
-          
-          style: {
-    "color": "#000000",
-    "fill": "none",
-    "weight": 2
-  },
-
- 
-  
-  onEachFeature: function(feature, layer) {
-
-  
-
-    if (feature.properties && feature.properties.name) {
-
-           
-            label = String(feature.properties.name);
-
-        
-            //layer.bindPopup(feature.properties.name).openTooltip();
-            var element = document.getElementById(".leaflet-tooltip");
-            console.log("all"  );
-            //element.classList.remove("background-color");
-
-
-            layer.bindPopup(layer.feature.properties.name, {permanent: true, opacity: 5}).openTooltip();
-           
-            //layer.bindTooltip("<h4>"+feature.properties.name+"</h4>", {permanent: true, opacity: 5});
-            //layer.bindPopup(layer.feature.properties.name);
-
-
-        }
-
-
-        ///push new tree
-
-        
-
-
-
-      }
-
-  
-});
-
-
-
-
-
-
-
-
-  
-
-    shapfile.addTo(map);
-
-
-
-
-  
-
-    if (vectorfirstload==0)
-            {
-
-              var rasterTree =
-            {
-              label: 'Vector Layers',
-            selectAllCheckbox: 'Un/select all',
-            children: [
-
-            {label: fileList.name, layer: shapfile },
-    
-              ]
-        }
-
-        overlaysTree.push(rasterTree);
-        vectorfirstload=1;
-
-        if(first ==""){
-          first="vector";
-        }
-        
-
-
-            }
-
-
-            else{
-
-        if(first=="vector"){
-          var objchild={label: fileList.name, layer: shapfile };
-          overlaysTree[1].children.push(objchild);
-          console.log(overlaysTree[1].children);
-        }
-
-        if(first=="raster"){
-          var objchild={label: fileList.name, layer: shapfile };
-          overlaysTree[2].children.push(objchild);
-          console.log(overlaysTree[2].label);
-        }
-       
-
-          }
-
-
-
-           lay.setOverlayTree(overlaysTree);
-
-
-    var long= longb;
-    var lat= latb;
-
-
-  const t= shapfile.addTo(map);
-
-  if(t==null){
-    console.log("LOAD ZIP FILE");
-  }
-    }; 
-
-reader.readAsArrayBuffer(fileList);
-
-/// attribue
-
-var userPolygon;
-
-  for (var f in layer._layers) {
-                var feature = layer._layers[f];
-              }
-  
-            
-      
-    //reader.readAsDataURL(fileList); 
-
-  
-    
-    //console.log(fileList);
-
-    //for the shapefiles in the folder called 'files' with the name pandr.shp
-
-
-  });
-
-
-
-     }
-
-             ///show value
-
-    
-      
- 
+function onOpenCvReady() {
+  document.getElementById('status').innerHTML = 'Ready';
+  document.getElementById("load").style.display = "none";
 
 
 }
 
-loadcor();
 
 
-    </script>
-  </body>
+</script>
+<script async src="./javascript/opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
+</body>
 </html>
