@@ -411,8 +411,30 @@ var diff=L.geoJSON(difference, {
 //difference.addTo(map);
 
 ////ile//////////////////////////////////////////////////////////
-    var il="./geoid/iles.zip";
-var shapfile_iles = new L.Shapefile(il, {         
+
+var il="./geoid/Iles.zip";
+var readeril  = new XMLHttpRequest();
+var shapfile_iles;
+
+
+
+
+function loadiles(){
+     
+    readeril.open("get",il, true);
+    readeril.onreadystatechange=  storedata_iles;
+    readeril.send(null);
+   
+   }
+
+function storedata_iles (){
+
+    if(readeril.readyState==4) {
+      var cnt=readeril.responseURL;
+      console.log("hhhhhhhhhhhhh:"+ il);
+  
+
+      shapfile_iles = new L.Shapefile(cnt, {         
 style: {
     "color": "#000000",
     "fill": "none",
@@ -458,8 +480,16 @@ style: {
 
   
 });
-
 shapfile_iles.addTo(map);
+    }
+    }
+
+
+    loadiles();
+    
+
+
+
 
 
 /////Actuelle ZE
