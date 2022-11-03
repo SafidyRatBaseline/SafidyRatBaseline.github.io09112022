@@ -89,10 +89,7 @@
 
 
   
-<script src="/__//firebasejs/9.13.0/firebase-app.js"></script>
-  
-   
-<script src="/__/firebasejs/9.13.0/firebase-analytics.js"></script>
+
  
 
 
@@ -109,14 +106,8 @@
 
 </head>
 
-  <body onload="initializeApp()">
-   <h1 class="trans"  ><br><br><br><br><br>
-
-    
+  <body >
  
-
-   </h1>
-   
 
    <div  id="map">
     <div class="loader" id="load">Loading...</div>
@@ -131,36 +122,43 @@
 
 
    <script type="module">
-
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js'
+  
+    // If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
+    import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-analytics.js'
   
     // Add Firebase products that you want to use
-   // import { getAuth } from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js'
-    //import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js'
+    import { getAuth } from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js'
+    import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js';
+  
+ 
+  const firebaseConfig = {
+    apiKey: "AIzaSyDJoAthfAwVbe5UDQ2VdnvCt08BzwiZj04",
+    authDomain: "ligne-de-base.firebaseapp.com",
+    projectId: "ligne-de-base",
+    storageBucket: "ligne-de-base.appspot.com",
+    messagingSenderId: "917214705951",
+    appId: "1:917214705951:web:5abc936ac337690879182a",
+    measurementId: "G-157J9FQZ8Z"
+  };
+  
+  // Initialize Firebase
+  //const app = initializeApp(firebaseConfig);
+  //const analytics = getAnalytics(app);
+  
+  
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+
+
+  
   </script>
 
     <script>
 
     
 ///FIREBASE 
-function initializeApp(){
-const firebaseConfig = {
-  apiKey: "AIzaSyDJoAthfAwVbe5UDQ2VdnvCt08BzwiZj04",
-  authDomain: "ligne-de-base.firebaseapp.com",
-  projectId: "ligne-de-base",
-  storageBucket: "ligne-de-base.appspot.com",
-  messagingSenderId: "917214705951",
-  appId: "1:917214705951:web:5abc936ac337690879182a",
-  measurementId: "G-157J9FQZ8Z"
-};
 
-// Initialize Firebase
-//const app = initializeApp(firebaseConfig);
-//const analytics = getAnalytics(app);
-
-
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-}
 
 
 /*datacor= async () => {
