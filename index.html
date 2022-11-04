@@ -26,13 +26,41 @@
   
     <style>
 
+#map {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        font-weight: 400;
+      }
 
+      .content {
+        margin: 0.25rem;
+        border-top: 1px solid #000;
+        padding-top: 0.5rem;
+      }
+
+      .header {
+        font-size: 1.8rem;
+        color: #7f7f7f;
+      }
+
+      .title {
+        font-size: 1.1rem;
+        color: #7f7f7f;
+        font-weight: bold;
+      }
+
+      .bottom {
+        margin-top: 64px;
+        font-size: 0.8rem;
+        color: #7f7f7f;
+      }
 
       body, html { margin:0; padding:0; height:100%;}
       body { font-family:sans-serif; }
       body * { font-weight:200;}
       h1 { position:absolute; background:white; padding:10px;}
-      #map { height:100%; }
+     
       .leaflet-container {
         background: rgba(0,0,0,.8) !important;
       }
@@ -85,6 +113,23 @@
   <link rel="stylesheet" href="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.css" />
 <script src="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.js"></script>
 
+<link rel="stylesheet" href="css/chat/styles.css" />
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/chat/L.Control.SlideMenu.css" />
+<script src="js/Chat/L.Control.SlideMenu.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+
 
 
 
@@ -107,7 +152,12 @@
 </head>
 
   <body >
+   
+    
  
+    
+    <!-- scripts -->
+    </div> 
 
    <div  id="map">
     <div class="loader" id="load">Loading...</div>
@@ -121,38 +171,9 @@
    <script type="text/javascript" src="./js/datareader.js"></script>
 
 
-   <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js'
-  
-    // If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
-    import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-analytics.js'
-  
-    // Add Firebase products that you want to use
-    import { getAuth } from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js'
-    import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js';
-  
- 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDJoAthfAwVbe5UDQ2VdnvCt08BzwiZj04",
-    authDomain: "ligne-de-base.firebaseapp.com",
-    projectId: "ligne-de-base",
-    storageBucket: "ligne-de-base.appspot.com",
-    messagingSenderId: "917214705951",
-    appId: "1:917214705951:web:5abc936ac337690879182a",
-    measurementId: "G-157J9FQZ8Z"
-  };
-  
-  // Initialize Firebase
-  //const app = initializeApp(firebaseConfig);
-  //const analytics = getAnalytics(app);
-  
-  
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-
-
-  
-  </script>
+   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
 
     <script>
 
@@ -325,15 +346,151 @@ attribution: mbAttr
         layers: baseLayer
       });
 
+/////////////////////configure chatttinnnng
+function sendMessage(e) {
+    e.preventDefault();
+  
+    // get values to be submitted
+    const timestamp = Date.now();
+    const messageInput = document.getElementById("message-input");
+    const message = messageInput.value;
+  
+    // clear the input box
+    messageInput.value = "";
+  
+    //auto scroll to bottom
+    document
+      .getElementById("messages")
+      .scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+  
+    // create db collection and send in the data
+    db.ref("messages/" + timestamp).set({
+      username,
+      message,
+    });
+  }
 
+
+const left = '<div class="header">Slide Menu (Left)</div>';
+const right = '<div class="header"></div>';
+    let contents = `
 
    
+      <div id="chat" >
+        <!-- messages will display here -->
+        <ull id="messages"></ull>
+  
+        <form id="message-form">
+          <input id="message-input" type="text" />
+          <button id="message-btn" type="submit">Send</button>
+        </form>
+      </div>
+
+
+    
+  
+
+   
+    `;
+   
+      /* left */
+    
+      L.control.slideMenu(right+ contents).addTo(map);
+      /* right */
+      const slideMenu = L.control
+        .slideMenu("", {
+         
+          width: "30%",
+          height: "75%",
+          delay: "50",
+         
+        })
+        .addTo(map);
+
+     
+
+/*
+        var chat = L.control({position: 'bottomleft',
+        width: '100%',
+        height:'10px'
+      });
+
+
+        chat.onAdd = function (map) {
+    var div = L.DomUtil.create('div');
+    div.innerHTML = `
+   <div  width="">
+      <div id="chat" >
+        <!-- messages will display here -->
+        <ul id="messages"></ul>
+  
+        <!-- form to send message -->
+        <form id="message-form">
+          <input id="message-input" type="text" />
+          <button id="message-btn" type="submit">Send</button>
+        </form>
+      </div>
+
+    <!-- scripts -->
+</div> 
+
+</div>
+   `; 
+    return div;
+
+  
+        
+};
+chat.addTo(map);*/
+
+
+    
+        const firebaseConfig = {
+    apiKey: "AIzaSyDJoAthfAwVbe5UDQ2VdnvCt08BzwiZj04",
+    authDomain: "ligne-de-base.firebaseapp.com",
+    projectId: "ligne-de-base",
+    storageBucket: "ligne-de-base.appspot.com",
+    messagingSenderId: "917214705951",
+    appId: "1:917214705951:web:09ad011d31c1726779182a",
+    measurementId: "G-XW0TFM93HK"
+  };
+  
+
+  // Initialize Firebase
+  const app= firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  const db = firebase.database();
+
+   const username = prompt("Please Tell Us Your Name");
+   document.getElementById("message-form").addEventListener("submit", sendMessage);
+
+
+   //fucntion for seeging msg
+
+
+  //receiving msg
+  const fetchChat = db.ref("messages/");
+
+  fetchChat.on("child_added", function (snapshot) {
+    const messages = snapshot.val();
+    const message = `<li class=${
+      username === messages.username ? "sent" : "receive"
+    }><span>${messages.username}: </span>${messages.message}</li>`;
+    // append the message on the page
+    document.getElementById("messages").innerHTML += message;
+  });
+
+
+
+ //slideMenu.setContents(right + contents);
+
+      console.log(document.getElementById("messages").textContent);
+
+     
 
       //////////////////////////////////////////////////
 
 
-/////measur
-L.control.polylineMeasure({unit: 'miles'}).addTo(map);
 
 
 
@@ -759,10 +916,6 @@ console.log(display_val);
       // make accessible for debugging
       layer = heatmapLayer;
 
-
-
-
-
       ///////LAYERS
 
       var osmbaseLayer = L.tileLayer(
@@ -853,37 +1006,6 @@ console.log(display_val);
 
 
 
-  //////////////////
-
-
-
-/*if(control._activeOverlayLayers.name=='Clouds2'){
-
-
-  console.log("okookokokokok:"+ control._activeOverlayLayers.name);
-}
-*/
-
-
-
-
-
-      // Creating a marker
-      /*
-      var marker=[]
-      for(let i=0; i<=datacor.length-3;i++){
-
-        marker[i] = new L.Marker([Latcor[i], Longcor[i]]);
-         // Adding popup to the marker
-         Cor[i]=Cor[i]-2.505;
-         marker[i].bindPopup( locName[i]+": "+ Cor[i]+ " m").openPopup();
-
-        marker[i].addTo(map);
-      
-
-      }
-
-      console.log(locName);*/
 
 
       var command = L.control({position: 'topright'});
@@ -1022,9 +1144,6 @@ document.getElementById("file-selector2").addEventListener("change", function(ev
 
             
 
-
-  
-
            lay.setOverlayTree(overlaysTree);
           
 
@@ -1076,18 +1195,14 @@ document.getElementById("file-selector2").addEventListener("change", function(ev
 
 
             layer.bindPopup(layer.feature.properties.name, {permanent: true, opacity: 5}).openTooltip();
-           
-            //layer.bindTooltip("<h4>"+feature.properties.name+"</h4>", {permanent: true, opacity: 5});
-            //layer.bindPopup(layer.feature.properties.name);
-
+        
 
         }
 
 
-        ///push new tree
+   
 
-        
-
+  
 
 
       }
@@ -1098,18 +1213,8 @@ document.getElementById("file-selector2").addEventListener("change", function(ev
 
 
 
-
-
-
-
-  
-
     shapfile.addTo(map);
 
-
-
-
-  
 
     if (vectorfirstload==0)
             {
@@ -1210,5 +1315,15 @@ loadcor();
 
 
     </script>
+
+
+
+<script>
+
+  
+  </script>
+  
+
+
   </body>
 </html>
